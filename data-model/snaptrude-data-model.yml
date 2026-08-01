@@ -1,0 +1,69 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.snaptrude.com/ (Structure Collection data-format docs)
+summary: >-
+  The Snaptrude "Structure Collection" is the JSON data format describing how
+  building data is serialized and organized. Entities below are drawn from the
+  documented data-format and the Plugin API namespaces; relationships reflect the
+  documented containment hierarchy (project -> buildings/storeys -> geometry).
+entities:
+  - name: Structure
+    description: A building definition (top-level building container).
+  - name: Storey
+    description: A level/floor within a structure.
+  - name: Layer
+    description: Layer composition used by walls/slabs and other assemblies.
+  - name: Sketch
+    description: Freehand/parametric sketch input.
+  - name: Floorplan
+    description: A floorplan associated with a storey.
+  - name: Container
+    description: Grouping container for building elements.
+  - name: Wall
+    description: A wall element.
+  - name: Space
+    description: A space/room (create/update/query/delete live under design.*).
+  - name: Geometry
+    description: Geometry kernel entities (Brep, Face, Edge, HalfEdge, Vertex, Curve, Profile, Contour).
+  - name: Material
+    description: Material and rendering specification.
+  - name: Light
+    description: Light specification (Materials & Rendering).
+  - name: Camera
+    description: Camera specification (Materials & Rendering).
+  - name: BuildableEnvelope
+    description: Entity-namespace buildable envelope.
+  - name: ReferenceLine
+    description: Entity-namespace reference line.
+  - name: Building
+    description: Core project-organization building grouping.
+  - name: Group
+    description: Core project-organization group.
+  - name: Tag
+    description: Core project-organization tag.
+relationships:
+  - from: Structure
+    to: Storey
+    type: has_many
+  - from: Storey
+    to: Floorplan
+    type: has_many
+  - from: Storey
+    to: Space
+    type: has_many
+  - from: Space
+    to: Wall
+    type: has_many
+    via: bounding walls
+  - from: Wall
+    to: Layer
+    type: has_many
+    via: layer composition
+  - from: Wall
+    to: Geometry
+    type: has_one
+  - from: Structure
+    to: Material
+    type: has_many
+metadata:
+  note: Project metadata, user settings, and versioning are documented under "Metadata & Settings".

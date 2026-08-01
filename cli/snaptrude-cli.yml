@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.snaptrude.com/plugin-api/plugin-development.html
+name: create-snaptrude-plugin
+package: "@snaptrude/create-snaptrude-plugin"
+summary: >-
+  First-party CLI to scaffold, authenticate, register, and update Snaptrude
+  plugins. Scaffolds a React + TypeScript + Vite plugin (UI panel + Web Worker),
+  manages a per-machine login session, and uploads builds to the Snaptrude plugin
+  registry.
+install:
+  - method: npx
+    command: npx @snaptrude/create-snaptrude-plugin@latest
+quickstart:
+  - npx @snaptrude/create-snaptrude-plugin@latest
+  - cd my-plugin
+  - npm install
+  - npm run dev
+authentication: >-
+  Session-based. `login` opens the Snaptrude app in the browser, completes
+  sign-in, and saves credentials (including the environment API URL) to
+  ~/.snaptrude/auth.json. register/update reuse that saved session.
+commands:
+  - name: create
+    default: true
+    description: Scaffold a new plugin project (clones the snaptrude-plugin-examples starter).
+    flags:
+      - "-n, --name <name>: plugin name (prompted if omitted)"
+      - "-v, --verbose: verbose output"
+  - name: login
+    description: >-
+      Run first on any machine that will register/update. Opens the app for
+      sign-in and saves the session to ~/.snaptrude/auth.json.
+    flags:
+      - "--app-url <url>: override the Snaptrude app URL for the login flow"
+  - name: register
+    description: >-
+      Runs npm run build:prod, stamps a fresh buildId into dist/manifest.json,
+      bundles the build, and uploads it to register a new plugin.
+    flags:
+      - "-p, --path <dir>: build output directory (default ./dist)"
+      - "--visibility <level>: private or public"
+      - "-v, --verbose"
+  - name: update
+    description: >-
+      Same flow as register but updates an existing plugin; dist/manifest.json
+      must already contain an id from a prior register.
+  - name: logout
+    description: Removes ~/.snaptrude/auth.json.
+  - name: whoami
+    description: Prints the name on the stored session.
+  - name: help
+    description: Prints CLI help (help <command> for command detail).
+key_flows:
+  - "Scaffold: create -> npm install -> npm run dev"
+  - "Deploy: login -> register --visibility private -> update"

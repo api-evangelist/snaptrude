@@ -1,7 +1,28 @@
 aid: snaptrude
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/snaptrude.png
 name: Snaptrude
-description: 'Snaptrude is a company surfaced as a portfolio company of accel and added to the API Evangelist
-  network as a stub for enrichment. Sector: design. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Snaptrude is a cloud-native design platform for architecture and interior design
+  that unifies sketching, real-time collaboration, AI-assisted programming, and BIM
+  into a single browser-based tool. Snaptrude 3.0 offers four integrated modes —
+  Program, Design Canvas, Present, and BIM — that turn concept massing into
+  Revit-ready assemblies while surfacing live metrics (GFA, FAR, cost, daylight).
+  For developers, Snaptrude publishes a client-side Plugin API (the `snaptrude`
+  namespace) documented at docs.snaptrude.com, with official @snaptrude npm
+  packages and a create-snaptrude-plugin CLI to scaffold, register, and update
+  React + TypeScript plugins. Backed by Accel.
 url: https://raw.githubusercontent.com/api-evangelist/snaptrude/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,11 +32,33 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Design
-apis: []
+- Architecture
+- BIM
+- 3D Modeling
+- AEC
+- Plugins
+- Developer Tools
+- SaaS
+apis:
+- name: Snaptrude Plugin API
+  description: >-
+    Client-side JavaScript/TypeScript Plugin API (the `snaptrude` global namespace)
+    for extending the Snaptrude platform. Organized by namespace — Core, Design,
+    Entity, Program, Presentation, Analysis — plus a Structure Collection JSON data
+    format. Consumed from a plugin Web Worker via @snaptrude/plugin-client.
+  humanURL: https://docs.snaptrude.com/
+  baseURL: https://api.snaptrude.com
+  properties:
+  - type: Documentation
+    url: https://docs.snaptrude.com/
+  - type: APIReference
+    url: https://docs.snaptrude.com/plugin-api.html
+  - type: GettingStarted
+    url: https://docs.snaptrude.com/plugin-api/plugin-development.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -24,3 +67,48 @@ maintainers:
 common:
 - type: Website
   url: https://www.snaptrude.com/
+- type: Documentation
+  url: https://docs.snaptrude.com/
+- type: APIReference
+  url: https://docs.snaptrude.com/plugin-api.html
+- type: GettingStarted
+  url: https://docs.snaptrude.com/plugin-api/plugin-development.html
+- type: Blog
+  url: https://www.snaptrude.com/blog
+- type: Pricing
+  url: https://www.snaptrude.com/pricing
+- type: TermsOfService
+  url: https://www.snaptrude.com/terms
+- type: PrivacyPolicy
+  url: https://www.snaptrude.com/privacy
+- type: Support
+  url: https://help.snaptrude.com
+- type: StatusPage
+  url: https://status.snaptrude.com/
+- type: GitHubOrganization
+  url: https://github.com/snaptrude
+- type: LLMsTxt
+  url: llms/snaptrude-llms.txt
+- type: Packages
+  url: packages/snaptrude-packages.yml
+- type: SDKs
+  url: packages/snaptrude-packages.yml
+- type: CLI
+  url: cli/snaptrude-cli.yml
+- type: Authentication
+  url: authentication/snaptrude-authentication.yml
+- type: ErrorCatalog
+  url: errors/snaptrude-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/snaptrude-lifecycle.yml
+- type: Conventions
+  url: conventions/snaptrude-conventions.yml
+- type: DataModel
+  url: data-model/snaptrude-data-model.yml
+- type: DomainSecurity
+  url: security/snaptrude-domain-security.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 9
+  pass: local-v1

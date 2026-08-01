@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.snaptrude.com/plugin-api/plugin-development.html + https://docs.snaptrude.com/plugin-api/error-handling.html + https://docs.snaptrude.com/plugin-api/handles.html
+summary: >-
+  Cross-cutting semantics of the Snaptrude Plugin API (the client-side `snaptrude.*`
+  RPC surface consumed by a plugin Web Worker via @snaptrude/plugin-client).
+authentication:
+  style: browser-login-session (CLI) + host-permission (runtime)
+  see: authentication/snaptrude-authentication.yml
+handles:
+  description: >-
+    Every structured value that crosses the plugin <-> host boundary (vectors,
+    curves, profiles, scene entities) is passed as an opaque handle rather than a
+    live object. Invalid or wrong-kind handles reject with HANDLE_INVALID /
+    HANDLE_KIND_MISMATCH.
+  docs: https://docs.snaptrude.com/plugin-api/handles.html
+error_envelope:
+  shape: typed PluginError with stable `code`, structured `details`, and a `fix` hint
+  see: errors/snaptrude-error-codes.yml
+  surfaced_to_user: runtime errors also raised as an automatic error toast
+history:
+  description: >-
+    Every host-API mutation commits an undoable command; a burst of edits collapses
+    into a single undo/redo unit. History is a first-class Core namespace.
+events:
+  mechanism: this.subscribe(event, callback) on the PluginWorker base class
+  note: >-
+    Not part of the snaptrude.* namespaces (does not appear in the discovery
+    manifest). Callbacks receive a structured-clone-safe payload, never live model
+    data.
+  events:
+    - name: "model:changed"
+      trigger: debounced whenever the project model is mutated (user or plugin edit)
+      payload: "ModelChangedEvent { source: string }  # currently always \"command\""
+      guidance: payload is minimal (that it changed, not what); re-query the API for state
+rate_limiting:
+  signaled_via: PluginError code RATE_LIMITED (and RESOURCE_QUOTA_EXCEEDED for quotas)
+batching:
+  note: batch operations can partially succeed and reject with BATCH_PARTIAL
+serialization:
+  note: >-
+    Results must be serializable and within size limits; otherwise RESULT_NOT_SERIALIZABLE
+    or RESULT_TOO_LARGE. UI<->Worker messaging uses structured-clone-safe payloads.
+idempotency:
+  supported: false
+  note: No idempotency-key mechanism is documented; the API is a stateful in-session RPC surface.
+versioning:
+  see: lifecycle/snaptrude-lifecycle.yml

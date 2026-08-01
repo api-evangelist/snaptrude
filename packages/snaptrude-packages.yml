@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.npmjs.com/search?q=%40snaptrude + https://docs.snaptrude.com/plugin-api/plugin-development.html
+notes: >-
+  Snaptrude publishes a client-side Plugin API (the `snaptrude` global namespace)
+  rather than a server SDK. The official first-party libraries are published under
+  the @snaptrude npm scope and referenced directly from the plugin-development docs.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@snaptrude/create-snaptrude-plugin"
+    url: https://www.npmjs.com/package/@snaptrude/create-snaptrude-plugin
+    install: npx @snaptrude/create-snaptrude-plugin@latest
+    description: >-
+      CLI tool to scaffold, register, and update Snaptrude plugins. Clones the
+      snaptrude-plugin-examples starter (React + TypeScript + Vite), manages the
+      login session, and uploads builds via create/login/register/update.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@snaptrude/plugin-client"
+    url: https://www.npmjs.com/package/@snaptrude/plugin-client
+    install: npm install @snaptrude/plugin-client
+    description: >-
+      Plugin worker client API. Provides the PluginWorker base class and the
+      `snaptrude.*` request/response API used by a plugin's Web Worker to interact
+      with the Snaptrude host, plus event subscription (this.subscribe).
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@snaptrude/plugin-core"
+    url: https://www.npmjs.com/package/@snaptrude/plugin-core
+    install: npm install @snaptrude/plugin-core
+    description: Core runtime shared by the Snaptrude plugin toolchain.
+    official: true

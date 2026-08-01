@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.snaptrude.com/plugin-api/plugin-development.html
+summary:
+  types: [session]
+  model: browser-login-session
+  notes: >-
+    Snaptrude's developer surface is the client-side Plugin API. There is no
+    public API-key or OAuth surface documented. Plugin developers authenticate
+    the CLI with a browser sign-in session; the plugin runtime itself runs inside
+    the authenticated Snaptrude app session and calls the host via the
+    @snaptrude/plugin-client `snaptrude.*` RPC API.
+schemes:
+  - name: cli-session-login
+    type: session
+    flow: >-
+      `create-snaptrude-plugin login` opens the Snaptrude app in the browser,
+      completes sign-in, and saves credentials (including the environment API URL)
+      to ~/.snaptrude/auth.json. register/update reuse that saved session; if not
+      logged in they exit and prompt to run login first.
+    credential_store: ~/.snaptrude/auth.json
+    backend_host: https://api.snaptrude.com
+    docs: https://docs.snaptrude.com/plugin-api/plugin-development.html
+  - name: plugin-runtime
+    type: host-permission
+    flow: >-
+      A plugin's Web Worker calls the host through the snaptrude.* API. Calls are
+      permission-gated by the host (METHOD_NOT_PERMITTED is returned when a plugin
+      is not allowed to call a method).

@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.snaptrude.com/plugin-api/error-handling.html
+format: typed-plugin-error
+envelope: >-
+  Every failed Plugin API call rejects with a typed PluginError carrying a stable
+  `code`, structured `details`, and a `fix` hint. Runtime errors are also surfaced
+  to the user as an error toast automatically.
+error_codes:
+  - code: VALIDATION
+    meaning: Invalid arguments passed to an API call.
+  - code: HANDLE_INVALID
+    meaning: A supplied handle is not valid (stale, disposed, or unknown).
+  - code: HANDLE_KIND_MISMATCH
+    meaning: A handle of the wrong kind was passed to an operation.
+  - code: METHOD_NOT_FOUND
+    meaning: The requested API method does not exist.
+  - code: METHOD_NOT_PERMITTED
+    meaning: The plugin is not permitted to call this method.
+  - code: INVALID_RPC_FORMAT
+    meaning: The request/response message did not match the expected RPC format.
+  - code: PRECONDITION_FAILED
+    meaning: A required precondition for the operation was not met.
+  - code: OPERATION_FAILED
+    meaning: The operation was attempted but failed.
+  - code: BATCH_PARTIAL
+    meaning: A batch operation partially succeeded; some items failed.
+  - code: CALL_TIMEOUT
+    meaning: A single API call exceeded its time budget.
+  - code: TIMEOUT
+    meaning: The operation timed out.
+  - code: RATE_LIMITED
+    meaning: The plugin exceeded the allowed call rate.
+  - code: RESOURCE_QUOTA_EXCEEDED
+    meaning: A resource quota for the plugin was exceeded.
+  - code: RESULT_TOO_LARGE
+    meaning: The result exceeded the maximum transferable size.
+  - code: RESULT_NOT_SERIALIZABLE
+    meaning: The result could not be serialized across the plugin/host boundary.
+  - code: PLUGIN_NOT_READY
+    meaning: The plugin runtime is not ready to service the call.
+  - code: PLUGIN_TERMINATED
+    meaning: The plugin has been terminated.
+  - code: TRANSPORT_LOST
+    meaning: The transport between plugin and host was lost.
+  - code: INTERNAL
+    meaning: An internal host error occurred.
+  - code: UNKNOWN
+    meaning: An unclassified error occurred.
