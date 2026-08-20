@@ -42,6 +42,16 @@ tags:
 - AEC
 - Plugins
 - Developer Tools
+- Software-as-a-Service
+tags_raw:
+- Company
+- Design
+- Architecture
+- BIM
+- 3D Modeling
+- AEC
+- Plugins
+- Developer Tools
 - SaaS
 apis:
 - name: Snaptrude Plugin API
